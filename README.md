@@ -3,10 +3,9 @@ Fish Gym is a physics-based simulation framework for physical articulated underw
 This is the first physics-based environment that support coupled interation between agents and fluid in semi-realtime.
 Fish Gym is integrated into the OpenAI Gym interface, enabling the use of existing reinforcement learning and control algorithms to control underwater agents to accomplish specific underwater exploration task.
 
-[Documentation](https://gym-fish.readthedocs.io/) [Docker](https://gym-fish.readthedocs.io/en/latest/User%20Guide/Installation.html#using-docker-imanges)
-
 https://user-images.githubusercontent.com/20988615/156165618-d0d034d8-2e48-4f2f-bc63-514da431b918.mp4
 
+[Documentation](https://gym-fish.readthedocs.io/) [Docker](https://gym-fish.readthedocs.io/en/latest/User%20Guide/Installation.html#using-docker-imanges)
 
 # Installation
 ## Use Docker Images
