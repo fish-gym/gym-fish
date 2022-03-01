@@ -41,7 +41,7 @@ conda install -c conda-forge moderngl
 
 ### 5. Install Fish Gym
 ```shell
-git clone https://github.com/dongfangliu/gym-fish.git
+git clone https://github.com/fish-gym/gym-fish.git
 cd gym-fish
 pip3 install -e .
 ```
@@ -79,7 +79,7 @@ env.render_mode='human'
 env.render()
 ```
 
-#### For headless machines (server/cluster)
+#### For headless machines(server/cluster)
 Run a virtual display. for more details, check [here](https://moderngl.readthedocs.io/en/latest/techniques/headless_ubuntu_18_server.html)
 
 Run follwing commands in your shell:
