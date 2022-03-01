@@ -1,0 +1,178 @@
+{
+    "skeletons": [
+        {
+            "skeleton_file": "../agents/koi_no_fin.json",
+            "controllable": true,
+            "sample_num": 10000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                0,
+                0,
+                0
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ],
+            "cameras":[
+                {
+                    "window_size":[800,600],
+                    "z_near":0.1,
+                    "z_far":1000,
+                    "fov":60,
+                    "center":[0.16,0,0.03],
+                    "target":[0.16,0,1.03],
+                    "up":[0,1,0]
+                },
+                {
+                    "window_size":[800,600],
+                    "z_near":0.1,
+                    "z_far":1000,
+                    "fov":60,
+                    "center":[0.16,0,-0.03],
+                    "target":[0.16,0,-1.03],
+                    "up":[0,1,0]
+                }
+            
+            ]
+        },
+        {
+            "skeleton_file": "../agents/ball_d0.2.json",
+            "controllable": false,
+            "sample_num": 1000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                1,
+                0,
+                0
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "skeleton_file": "../agents/ball_d0.2.json",
+            "controllable": false,
+            "sample_num": 1000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                1.5,
+                0,
+                0.5
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "skeleton_file": "../agents/ball_d0.2.json",
+            "controllable": false,
+            "sample_num": 1000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                1.5,
+                0,
+                -0.5
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "skeleton_file": "../agents/ball_d0.2.json",
+            "controllable": false,
+            "sample_num": 1000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                2.5,
+                0,
+                0.5
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "skeleton_file": "../agents/ball_d0.2.json",
+            "controllable": false,
+            "sample_num": 1000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                2.5,
+                0,
+                -0.5
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "skeleton_file": "../agents/ball_d0.2.json",
+            "controllable": false,
+            "sample_num": 1000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                2,
+                0,
+                0
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        }
+     
+    ],
+    "gravity": [
+        0,
+        0,
+        0
+    ]
+}

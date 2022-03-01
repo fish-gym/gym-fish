@@ -1,0 +1,13 @@
+{
+    "rigid_json": "../rigid/rigids_collision_avoidance.json",
+    "fluid_json": "../fluid/fluid_param_0.5.json",
+    "camera":{
+        "window_size":[800,600],
+        "z_near":0.1,
+        "z_far":1000,
+        "fov":60,
+        "center":[1.5,1.5,1.5],
+        "target":[1.5,0,0],
+        "up":[0,1,0]
+    }
+}

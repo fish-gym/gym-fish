@@ -1,0 +1,13 @@
+{
+    "rigid_json": "../rigid/rigids_koi_no_fin.json",
+    "fluid_json": "../fluid/fluid_param_posecontrol.json",
+    "camera":{
+        "window_size":[800,600],
+        "z_near":0.1,
+        "z_far":1000,
+        "fov":50,
+        "center":[0,1,0.5],
+        "target":[0,0,0],
+        "up":[0,1,0]
+    }
+}

@@ -1,0 +1,567 @@
+{
+    "baseFrameName": "[link]joint1::joint2",
+    "baseLinkFwd": [
+        1.0,
+        0.0,
+        0.0
+    ],
+    "baseLinkName": "[link]joint1::joint2",
+    "baseLinkRight": [
+        0.0,
+        0.0,
+        1.0
+    ],
+    "baseLinkUp": [
+        0.0,
+        1.0,
+        0.0
+    ],
+    "joints": {
+        "joint1": {
+            "actuator": "passive",
+            "axis": [
+                [
+                1.0,
+                0.0,
+                0.0
+            ],
+                [
+                0.0,
+                0.0,
+                1.0
+            ]
+                    ],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint1",
+            "springStiffness": 0.0,
+            "type": "planar",
+            "useDynamcis": false,
+            "useLimits": false
+        },
+        "joint2": {
+            "actuator": "passive",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2],
+                "lower": [-0.116],
+                "upper": [0.116],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint2",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint3": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2],
+                "lower": [-0.116],
+                "upper": [0.116],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint3",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint4": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint4",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint5": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint5",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint6": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint6",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint7": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint7",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint8": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint8",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint9": {
+            "actuator": "force",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint9",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint10": {
+            "actuator": "passive",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint10",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint11": {
+            "actuator": "passive",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint11",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint12": {
+            "actuator": "passive",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint12",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint13": {
+            "actuator": "passive",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [2.0],
+                "lower": [-0.26],
+                "upper": [0.26],
+                "velocity": [10.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint13",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        },
+        "joint14": {
+            "actuator": "passive",
+            "axis": [[
+                0.0,
+                1.0,
+                0.0
+            ]],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [0.0],
+                "lower": [0.0],
+                "upper": [0.0],
+                "velocity": [0.0]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint14",
+            "springStiffness": 0.1,
+            "type": "revolute",
+            "useDynamcis": false,
+            "useLimits": true
+        }
+    },
+    "links": {
+        "[link]joint1::joint2": {
+            "isIntermediate": false,
+            "mass": 2.0,
+            "name": "[link]joint1::joint2",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.06646374555563823,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint2::joint3": {
+            "isIntermediate": false,
+            "mass": 1.0,
+            "name": "[link]joint2::joint3",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.050703734159469604,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint3::joint4": {
+            "isIntermediate": false,
+            "mass": 0.5,
+            "name": "[link]joint3::joint4",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.05070373043417931,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint4::joint5": {
+            "isIntermediate": false,
+            "mass": 0.4,
+            "name": "[link]joint4::joint5",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.050980553734503053,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint5::joint6": {
+            "isIntermediate": false,
+            "mass": 0.3,
+            "name": "[link]joint5::joint6",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.04454316438551914,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint6::joint7": {
+            "isIntermediate": false,
+            "mass": 0.2,
+            "name": "[link]joint6::joint7",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.04557248064500024,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint7::joint8": {
+            "isIntermediate": false,
+            "mass": 0.2,
+            "name": "[link]joint7::joint8",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.04374606672660602,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint8::joint9": {
+            "isIntermediate": false,
+            "mass": 0.2,
+            "name": "[link]joint8::joint9",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.043698466302198195,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint9::joint10": {
+            "isIntermediate": false,
+            "mass": 0.2,
+            "name": "[link]joint9::joint10",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.03984969873530954,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint10::joint11": {
+            "isIntermediate": false,
+            "mass": 0.1,
+            "name": "[link]joint10::joint11",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.04515033576612062,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint11::joint12": {
+            "isIntermediate": false,
+            "mass": 0.1,
+            "name": "[link]joint11::joint12",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.03952100441235822,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint12::joint13": {
+            "isIntermediate": false,
+            "mass": 0.1,
+            "name": "[link]joint12::joint13",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.03821925601771226,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]joint13::joint14": {
+            "isIntermediate": false,
+            "mass": 0.04,
+            "name": "[link]joint13::joint14",
+            "radius ": 0.014999999664723873,
+            "size": [
+                0.035,
+                0.05,
+                0.05
+            ]
+        }
+    },
+    "markers_placements": [],
+    "model_file": "../fbx_models/eel.fbx"
+}

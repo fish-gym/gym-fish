@@ -1,0 +1,111 @@
+{
+    "baseFrameName": "[link]joint1::joint2",
+    "baseLinkFwd": [
+        1.0,
+        0.0,
+        0.0
+    ],
+    "baseLinkName": "[link]joint1::joint2",
+    "baseLinkRight": [
+        0.0,
+        0.0,
+        1.0
+    ],
+    "baseLinkUp": [
+        0.0,
+        1.0,
+        0.0
+    ],
+    "joints": {
+        "joint1": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0.0,
+                    1.0,
+                    0.0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [
+                    0.0
+                ],
+                "lower": [
+                    0.0
+                ],
+                "upper": [
+                    0.0
+                ],
+                "velocity": [
+                    0.0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint1",
+            "springStiffness": 0.0,
+            "type": "fixed",
+            "useDynamcis": false,
+            "useLimits": false
+        },
+        "joint2": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0.0,
+                    1.0,
+                    0.0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0.0,
+                "friction": 0.0
+            },
+            "limit": {
+                "effort": [
+                    0.0
+                ],
+                "lower": [
+                    0.0
+                ],
+                "upper": [
+                    0.0
+                ],
+                "velocity": [
+                    0.0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1.0,
+                "offset": 0.0
+            },
+            "name": "joint2",
+            "springStiffness": 0.0,
+            "type": "fixed",
+            "useDynamcis": false,
+            "useLimits": false
+        }
+    },
+    "links": {
+        "[link]joint1::joint2": {
+            "isIntermediate": false,
+            "mass": 1.0,
+            "name": "[link]joint1::joint2",
+            "size": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    },
+    "markers_placements": [],
+    "model_file": "../fbx_models/ball_d1.fbx"
+}

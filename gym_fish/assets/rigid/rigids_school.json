@@ -1,0 +1,51 @@
+{
+    "skeletons": [
+        {
+            "skeleton_file": "../agents/koi_no_fin_servo.json",
+            "controllable": false,
+            "sample_num": 10000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                0,
+                0,
+                0
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "skeleton_file": "../agents/koi_no_fin.json",
+            "controllable": true,
+            "sample_num": 10000,
+            "has_buoyancy": false,
+            "density":1080,
+            "bladder_volume_min":0,
+            "bladder_volume_max":2,
+            "bladder_volume_control_min":-0.01,
+            "bladder_volume_control_max":0.01,
+            "offset_pos": [
+                -0.5,
+                0,
+                0
+            ],
+            "offset_rotation": [
+                0,
+                0,
+                0
+            ]
+        }
+    ],
+    "gravity": [
+        0,
+        0,
+        0
+    ]
+}
