@@ -7,7 +7,10 @@ Fish Gym is integrated into the OpenAI Gym interface, enabling the use of existi
 
 [**Docker**](https://gym-fish.readthedocs.io/en/latest/User%20Guide/Installation.html#using-docker-imanges)
 
-https://user-images.githubusercontent.com/20988615/156165618-d0d034d8-2e48-4f2f-bc63-514da431b918.mp4
+
+https://user-images.githubusercontent.com/20988615/156168462-d4d54b52-ac7d-40b9-97d2-f0d15f072e5e.mp4
+
+
 
 # Installation
 ## Use Docker Images
