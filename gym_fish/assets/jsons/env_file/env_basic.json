@@ -1,0 +1,62 @@
+{
+    "coupling": {
+        "empirical_force_amplifier": 1600,
+        "method": "ImmersedBoundary",
+        "sample_num": 10000
+    },
+    "fluid": {
+        "N": 50.0,
+        "depth": 2.0,
+        "height": 2.0,
+        "l0p": 1.0,
+        "rou0p": 1000,
+        "slip_ratio": 1.0,
+        "u0k": 0.1,
+        "u0p": 0.5,
+        "visp": 0.0001,
+        "width": 2.0,
+        "x0": 0.0,
+        "y0": 0.0,
+        "z0": 0.0
+    },
+    "gravity": [
+        0.0,
+        0.0,
+        0.0
+    ],
+    "reference_of_frame": {
+        "link_name": "[link]head::spine",
+        "relative_translation": [
+            -0.0,
+            0,
+            0
+        ],
+        "solid_name": "fish",
+        "is_translational_only": true
+    },
+    "solid_solver": "DART",
+    "solids": [
+        {
+            "buoyancy": {
+                "bladder_volume_max": 2.0,
+                "bladder_volume_min": 0.0,
+                "body_density": 1080.0,
+                "enabled": false,
+                "fluid_density": 1000.0,
+                "max_delta_change": 0.01
+            },
+            "init_position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "init_rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "fish",
+            "path": "../robots/koi_no_fin_force.json"
+        }
+    ]
+}

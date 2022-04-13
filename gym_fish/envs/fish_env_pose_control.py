@@ -1,5 +1,8 @@
 from sys import path
 from typing import Any, Dict, Tuple
+
+from gym import spaces
+
 from .coupled_env import coupled_env
 from .lib import pyflare as fl
 from .py_util import np_util as np_util 
@@ -13,6 +16,10 @@ from matplotlib.patches import FancyArrowPatch
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.proj3d import proj_transform
 from mpl_toolkits.mplot3d.axes3d import Axes3D
+
+from .visualization.camera import camera
+
+
 class Arrow3D(FancyArrowPatch):
     def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
         super().__init__((0,0), (0,0), *args, **kwargs)
@@ -44,7 +51,7 @@ class FishEnvPoseControl(coupled_env):
                 # phi should be in the range of [0,360]
                 phi = np.array([0,0]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_pose_control.json',
+                env_json :str = '../assets/jsons/env_file/env_koi.json',
                 gpuId: int=0,
                 couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
                 empirical_force_amplifier =1600) -> None:
@@ -57,19 +64,32 @@ class FishEnvPoseControl(coupled_env):
         self.max_time = max_time
         self.save=False
         # use parent's init function to init default env data, like action space and observation space, also init dynamics
-        super().__init__(data_folder,env_json, gpuId, couple_mode=couple_mode,empirical_force_amplifier=empirical_force_amplifier)
+        super().__init__(data_folder,env_json, gpuId)
 
+    def _get_scene_camera(self) -> camera:
+        return camera(0.1,1000,window_size=[800,600],center=[0,1,0.5],target=[0,0,0])
+
+    def _get_action_space(self) -> spaces.Box:
+        entity = self.simulator.solid_solver.GetEntity("fish")
+        bcu = entity.bcu
+        low = entity.GetForceLowerLimits()
+        high = entity.GetForceUpperLimits()
+        if bcu.enabled:
+            low = np.concatenate([low,[-bcu.max_delta_change]])
+            high = np.concatenate([high,[bcu.max_delta_change]])
+        return spaces.Box(low,high,shape=low.shape)
 
     def _step(self, action) -> None:
         t = 0
-        save_fluid = (self.save and self.couple_mode!= fl.COUPLE_MODE.EMPIRICAL)
+        agent = self.simulator.solid_solver.GetEntity("fish")
         while t<self.control_dt:
-            self.simulator.iter(action)
+            agent.SetCommands(action[:-1])
+            if agent.bcu.enabled:
+                agent.bcu.Change(action[-1])
+            self.simulator.step()
             t = t+self.simulator.dt
             self.render_at_framerate()
-            if self.save:
-#                 self.save_at_framerate(True,save_fluid)
-                self.save_at_framerate(True,False)
+            self.save_at_framerate(self.save,self.save)
             if not np.isfinite(self._get_obs()).all():
                 break
     def _get_reward(self, cur_obs, cur_action) :
@@ -94,10 +114,10 @@ class FishEnvPoseControl(coupled_env):
         return np.clip((action-action_space_mean)/action_space_std,-1,1)
     def _get_obs(self) -> np.array:
         self._update_state()
-        agent = self.simulator.rigid_solver.get_agent(0)
+        agent = self.simulator.solid_solver.GetEntity("fish")
         self.trajectory_poses.append((self.body_xyz ,self.x_axis,self.y_axis,self.z_axis ))
 #         proj_pt_local = np.dot(self.world_to_local,np.transpose(self.proj_pt_world-self.body_xyz))
-        if agent.has_buoyancy:
+        if agent.bcu.enabled:
             scalar_obs  = np.array([agent.bcu.bladder_volume,self.rotation_distance])
         else:
             scalar_obs= np.array([self.rotation_distance])
@@ -105,8 +125,8 @@ class FishEnvPoseControl(coupled_env):
             (
                 scalar_obs,
                 self.quaternion_diff,
-                agent.positions/0.52,
-                agent.velocities/10,
+                agent.GetPositions()/0.52,
+                agent.GetVelocities()/10,
         ),axis=0)
         if np.isfinite(obs).all():
             self.last_obs = obs
@@ -114,11 +134,11 @@ class FishEnvPoseControl(coupled_env):
 
     
     def _update_state(self):
-        agent = self.simulator.rigid_solver.get_agent(0)
-        self.body_xyz =  agent.com
-        self.x_axis = agent.fwd_axis
-        self.y_axis = agent.up_axis
-        self.z_axis = agent.right_axis
+        agent = self.simulator.solid_solver.GetEntity("fish")
+        self.body_xyz =  agent.GetCOM()
+        self.x_axis = agent.GetBaseLinkFwd()
+        self.y_axis = agent.GetBaseLinkUp()
+        self.z_axis = agent.GetBaseLinkRight()
         r =np.array([self.x_axis,self.y_axis,self.z_axis]).transpose()
         quaternion_now  =  Quaternion(matrix=r)
         # normalize
@@ -135,18 +155,10 @@ class FishEnvPoseControl(coupled_env):
         r = np.array([fwd_vec,up_vec,right_vec]).transpose()
         self.quaternion_desired  =  Quaternion(matrix=r)
         
-        agent = self.simulator.rigid_solver.get_agent(0)
-        for jnt_name,jnt in agent.joints.items():
-            # neglect root joint
-            if jnt.jnt_type=="planar" or jnt.jnt_type=="floating":
-                continue
-            jnt.setVelocities(self.np_random.uniform(jnt.velocity_lower_limits,jnt.velocity_upper_limits))
-            jnt.setPositions(self.np_random.uniform(jnt.position_lower_limits,jnt.position_upper_limits))
-        agent._dynamics.update()
+
         
     def _reset_task(self):
-        agent = self.simulator.rigid_solver.get_agent(0)
-        agent.bcu.reset(randomize=False)
+        agent = self.simulator.solid_solver.GetEntity("fish")
         theta = self.np_random.uniform(self.theta[0],self.theta[1])
         phi = self.np_random.uniform(self.phi[0],self.phi[1])
        
@@ -181,7 +193,7 @@ class FishEnvPoseControl(coupled_env):
                 ax.arrow3D(body_xyz[0],body_xyz[2],body_xyz[1],fwd_axis[0],fwd_axis[2],fwd_axis[1],arrowstyle="-|>",mutation_scale=20,ec =(0,0,0,i/len(trajectory_poses)),fc=(1,0,0,i/len(trajectory_poses)))
                 ax.arrow3D(body_xyz[0],body_xyz[2],body_xyz[1],right_axis[0],right_axis[2],right_axis[1],arrowstyle="-|>",mutation_scale=20,ec =(0,0,0,i/len(trajectory_poses)),fc=(0,1,0,i/len(trajectory_poses)))
                 ax.arrow3D(body_xyz[0],body_xyz[2],body_xyz[1],up_axis[0],up_axis[2],up_axis[1],arrowstyle="-|>",mutation_scale=20,ec =(0,0,0,i/len(trajectory_poses)),fc=(0,0,1,i/len(trajectory_poses)))
-        ax.view_init(elev=elev, azim=azim)  # 改变绘制图像的视�?即相机的位置,azim沿着z轴旋转，elev沿着y�?        ax.set_xlabel('x')
+        ax.view_init(elev=elev, azim=azim)  # 改变绘制图像的视�?即相机的位置,azim沿着z轴旋转，elev沿着y�?        ax.set_xlabel('x')
         ax.set_ylabel('z')
         ax.set_zlabel('y')
         if title != None:

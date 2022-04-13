@@ -1,6 +1,5 @@
 
 import numpy as np
-from .lib import pyflare as fl
 from .fish_env_basic import FishEnvBasic
 
 class KoiCruisingEnv(FishEnvBasic):
@@ -15,14 +14,12 @@ class KoiCruisingEnv(FishEnvBasic):
                 theta = np.array([90,90]),
                 phi = np.array([0,0]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_cruising_koi.json',
+                env_json :str = '../assets/jsons/env_file/env_koi.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  is3D= False,
                  use_com=True
                 ) -> None:
-        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,couple_mode,empirical_force_amplifier,is3D,use_com)
+        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,is3D,use_com)
 
 # class KoiFinnedCruisingEnv(FishEnvBasic):
 #     def __init__(self, 
@@ -57,14 +54,12 @@ class FlatfishCruisingEnv(FishEnvBasic):
                 theta = np.array([90,90]),
                 phi = np.array([0,0]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_cruising_flatfish.json',
+                env_json :str = '../assets/jsons/env_file/env_flatfish.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  is3D= False,
                  use_com=True
                 ) -> None:
-        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,couple_mode,empirical_force_amplifier,is3D,use_com)
+        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,is3D,use_com)
 
         
 
@@ -80,14 +75,12 @@ class EelCruisingEnv(FishEnvBasic):
                 theta = np.array([90,90]),
                 phi = np.array([0,0]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_cruising_eel.json',
+                env_json :str = '../assets/jsons/env_file/env_eel.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  is3D= False,
                  use_com=True
                 ) -> None:
-        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,couple_mode,empirical_force_amplifier,is3D,use_com)
+        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,is3D,use_com)
         
         
 
@@ -105,11 +98,9 @@ class KoiCruising3dEnv(FishEnvBasic):
                 theta = np.array([90,90]),
                 phi = np.array([45,45]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_cruising_koi3d.json',
+                env_json :str = '../assets/jsons/env_file/env_koi3d.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  is3D= True,
                  use_com=True
                 ) -> None:
-        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,couple_mode,empirical_force_amplifier,is3D,use_com)
+        super().__init__(control_dt,wp, wr,wa,max_time,done_dist,radius,theta,phi,data_folder,env_json,gpuId,is3D,use_com)

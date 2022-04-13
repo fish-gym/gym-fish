@@ -1,6 +1,6 @@
 import numpy as np
 from .lib import pyflare as fl
-from .fish_env_path_basic import FishEnvPathBasic
+from .fish_env_path_basic import  FishEnvPathBasic
 
 class KoiPathEnv(FishEnvPathBasic):
     def __init__(self, 
@@ -15,14 +15,12 @@ class KoiPathEnv(FishEnvPathBasic):
                  phi = np.array([0,0]),
                 dist_distri_param =np.array([0,0.5]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_path_koi.json',
+                env_json :str = '../assets/jsons/env_file/env_koi.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  use_com=True,
                  no_closeness_obs = False,
                 ) -> None:
-        super().__init__(control_dt=control_dt,wc = wc,wp = wp,wa = wa,max_time = max_time,done_dist=done_dist,radius = radius,theta = theta,phi = phi,dist_distri_param =dist_distri_param,data_folder = data_folder,env_json = env_json,gpuId=gpuId,couple_mode=couple_mode,empirical_force_amplifier =empirical_force_amplifier,use_com=use_com,no_closeness_obs =no_closeness_obs)
+        super().__init__(control_dt=control_dt,wc = wc,wp = wp,wa = wa,max_time = max_time,done_dist=done_dist,radius = radius,theta = theta,phi = phi,dist_distri_param =dist_distri_param,data_folder = data_folder,env_json = env_json,gpuId=gpuId,use_com=use_com,no_closeness_obs =no_closeness_obs)
 
 class FlatfishPathEnv(FishEnvPathBasic):
     def __init__(self, 
@@ -37,14 +35,12 @@ class FlatfishPathEnv(FishEnvPathBasic):
                  phi = np.array([0,0]),
                 dist_distri_param =np.array([0,0.5]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_path_flatfish.json',
+                env_json :str = '../assets/jsons/env_file/env_flatfish.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  use_com=True,
                  no_closeness_obs = False,
                 ) -> None:
-        super().__init__(control_dt=control_dt,wc = wc,wp = wp,wa = wa,max_time = max_time,done_dist=done_dist,radius = radius,theta = theta,phi = phi,dist_distri_param =dist_distri_param,data_folder = data_folder,env_json = env_json,gpuId=gpuId,couple_mode=couple_mode,empirical_force_amplifier =empirical_force_amplifier,use_com=use_com,no_closeness_obs =no_closeness_obs)
+        super().__init__(control_dt=control_dt,wc = wc,wp = wp,wa = wa,max_time = max_time,done_dist=done_dist,radius = radius,theta = theta,phi = phi,dist_distri_param =dist_distri_param,data_folder = data_folder,env_json = env_json,gpuId=gpuId,use_com=use_com,no_closeness_obs =no_closeness_obs)
         
 class EelPathEnv(FishEnvPathBasic):
     def __init__(self, 
@@ -59,11 +55,9 @@ class EelPathEnv(FishEnvPathBasic):
                  phi = np.array([0,0]),
                 dist_distri_param =np.array([0,0.0]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_path_eel.json',
+                env_json :str = '../assets/jsons/env_file/env_eel.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  use_com=False,
                  no_closeness_obs = True,
                 ) -> None:
-        super().__init__(control_dt=control_dt,wc = wc,wp = wp,wa = wa,max_time = max_time,done_dist=done_dist,radius = radius,theta = theta,phi = phi,dist_distri_param =dist_distri_param,data_folder = data_folder,env_json = env_json,gpuId=gpuId,couple_mode=couple_mode,empirical_force_amplifier =empirical_force_amplifier,use_com=use_com,no_closeness_obs =no_closeness_obs)
+        super().__init__(control_dt=control_dt,wc = wc,wp = wp,wa = wa,max_time = max_time,done_dist=done_dist,radius = radius,theta = theta,phi = phi,dist_distri_param =dist_distri_param,data_folder = data_folder,env_json = env_json,gpuId=gpuId,use_com=use_com,no_closeness_obs =no_closeness_obs)

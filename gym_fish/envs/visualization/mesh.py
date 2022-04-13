@@ -1,8 +1,7 @@
 import numpy as np
-from gym_fish.envs.entities.underwater_agent import underwater_agent
 import moderngl
 class mesh:
-    def __init__(self,agent:underwater_agent,ctx:moderngl.Context,prog:moderngl.Program) -> None:
+    def __init__(self,agent,ctx:moderngl.Context,prog:moderngl.Program) -> None:
         self.set_agent(agent)
         self.ctx = ctx
         self.prog = prog
@@ -12,11 +11,11 @@ class mesh:
         self.index_buffer = self.ctx.buffer(self.indices.tobytes())
         self.vao =self.ctx.simple_vertex_array(self.prog,self.vbo,'in_pos','in_normal',index_buffer=self.index_buffer,index_element_size=self.indices.dtype.itemsize)
 
-    def set_agent(self,agent:underwater_agent)->None:
+    def set_agent(self,agent)->None:
         self._agent = agent
     def update_mesh_data(self):
         if self._agent!=None:
-            data = self._agent._dynamics.getRenderData()
+            data = self._agent.GetRenderData()
             self.pos = np.array(data.pos)
             self.normal = np.array(data.normal)
             self.uv = np.array(data.uv)

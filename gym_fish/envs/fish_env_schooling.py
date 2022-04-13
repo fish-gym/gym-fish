@@ -1,5 +1,8 @@
 from sys import path
 from typing import Any, Dict, Tuple
+
+from gym import spaces
+
 from .coupled_env import coupled_env
 from .lib import pyflare as fl
 from .py_util import np_util as np_util 
@@ -7,6 +10,9 @@ import numpy as np
 import os
 import math
 import json
+
+from .visualization.camera import camera
+
 
 class FishEnvSchooling(coupled_env):
     def __init__(self, 
@@ -16,9 +22,8 @@ class FishEnvSchooling(coupled_env):
                 max_time = 10,
                 done_dist=0.2,
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_school.json',
-                gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,empirical_force_amplifier=1600) -> None:
+                env_json :str = '../assets/jsons/env_file/env_school.json',
+                gpuId: int=0) -> None:
         self.wd = wd
         self.wa = wa
         self.done_dist = done_dist
@@ -26,26 +31,36 @@ class FishEnvSchooling(coupled_env):
         self.max_time = max_time
         self.save=False
         # use parent's init function to init default env data, like action space and observation space, also init dynamics
-        super().__init__(data_folder,env_json, gpuId, couple_mode=couple_mode,empirical_force_amplifier=empirical_force_amplifier)
+        super().__init__(data_folder,env_json, gpuId)
         
         self.local_bb_half = np.array([3,1,2])/2
 
+    def _get_scene_camera(self) -> camera:
+        return camera(0.03,300,fov=45,window_size=[800,600],center=[-1.96045,3.45622,-3.37217],target=[1.5,0,0])
+
+    def _get_action_space(self) -> spaces.Box:
+        entity = self.simulator.solid_solver.GetEntity("chasefish")
+        bcu = entity.bcu
+        low = entity.GetForceLowerLimits()
+        high = entity.GetForceUpperLimits()
+        if bcu.enabled:
+            low = np.concatenate([low,[-bcu.max_delta_change]])
+            high = np.concatenate([high,[bcu.max_delta_change]])
+        return spaces.Box(low,high,shape=low.shape)
 
     def _step(self, action) -> None:
         t = 0
-        save_fluid = (self.save and self.couple_mode!= fl.COUPLE_MODE.EMPIRICAL)
         while t<self.control_dt:
             targetAngle = (3.1415/6)*math.sin(6.28*2*self.simulator.time)
-#             act = (targetAngle-self.free_robot.joints["spine02"].positions[0])/self.simulator.dt-self.free_robot.fwd_axis[2]*2 
-#             act = (targetAngle-self.free_robot.joints["spine"].positions[0])/self.simulator.dt   
-            act = (targetAngle-self.free_robot.joints["spine"].positions[0]-self.free_robot.fwd_axis[2])/self.simulator.dt 
-            self.free_robot._dynamics.setCommands(np.ones(self.free_robot_action_dim)*act)
-            self.simulator.iter(action)
+            act = (targetAngle-self.free_robot.GetJoint("spine").GetPositions()[0]-self.free_robot.GetBaseLinkFwd()[2])/self.simulator.dt
+            self.free_robot.setCommands(np.ones(self.free_robot_action_dim)*act)
+            self.chase_robot.SetCommands(action[:-1])
+            if self.chase_robot.bcu.enabled:
+                self.chase_robot.bcu.Change(action[-1])
+            self.simulator.Step()
             t = t+self.simulator.dt
             self.render_at_framerate()
-            if self.save:
-                self.save_at_framerate(True,save_fluid)
-#                 self.save_at_framerate(True,False)
+            self.save_at_framerate(self.save,self.save)
             if not np.isfinite(self._get_obs()).all():
                 break
                 
@@ -85,8 +100,8 @@ class FishEnvSchooling(coupled_env):
         #in local coordinate
         dp_local = np.dot(self.world_to_local,np.transpose(self.target_xyz-self.body_xyz))
         vel_local = np.dot(self.world_to_local,np.transpose(self.vel))
-        joint_pos = self.chase_robot.positions
-        joint_vel = self.chase_robot.velocities
+        joint_pos = self.chase_robot.GetPositions()
+        joint_vel = self.chase_robot.GetVelocities()
         obs = np.concatenate(
             ([float(self.collided)],
                 dp_local,
@@ -100,32 +115,27 @@ class FishEnvSchooling(coupled_env):
         return self.last_obs
     
     def _update_state(self):
-        self.body_xyz =  self.chase_robot.com
-        self.target_xyz = self.free_robot.com
-        self.vel  =  self.chase_robot.linear_vel
+        self.body_xyz =  self.chase_robot.GetCOM()
+        self.target_xyz = self.free_robot.GetCOM()
+        self.vel  =  self.chase_robot.GetCOMLinearVelocity()
         # update local matrix
-        x_axis = self.chase_robot.fwd_axis
-        y_axis = self.chase_robot.up_axis
-        z_axis = self.chase_robot.right_axis
+        x_axis = self.chase_robot.GetBaseLinkFwd()
+        y_axis = self.chase_robot.GetBaseLinkUp()
+        z_axis = self.chase_robot.GetBaseLinkRight()
         self.world_to_local = np.linalg.inv(np.array([x_axis,y_axis,z_axis]).transpose())
         self.walk_target_dist = np.linalg.norm(self.body_xyz-self.target_xyz)
-        self.collided = (self.collided or self.free_robot.collided)
+        self.collided = (self.collided or self.free_robot.beCollided())
         self.free_robot_trajectory_points.append(self.target_xyz)
         self.chase_robot_trajectory_points.append(self.body_xyz)
 
     def _reset_robot(self):
-        self.free_robot = self.simulator.rigid_solver.get_agent(0)
-        self.chase_robot = self.simulator.rigid_solver.get_agent(1)
-        self.free_robot_action_dim = self.free_robot._dynamics.getNumDofs()
-        if self.free_robot.has_buoyancy:
-            self.free_robot_action_dim =self.free_robot_action_dim+1
-        frame = self.free_robot.base_link.body_frame
-        self.chase_robot.set_ref_frame(frame)
+        self.free_robot = self.simulator.solid_solver.GetEntity("freefish")
+        self.chase_robot = self.simulator.solid_solver.GetEntity("chasefish")
+        self.free_robot_action_dim = self.free_robot.GetControlDOFs()
         
         
     def _reset_task(self):
-        self.simulator.rigid_solver.get_agent(0).bcu.reset(randomize=False)
-        self.simulator.rigid_solver.get_agent(1).bcu.reset(randomize=False)
+        pass
 
 
     def reset(self) -> Any:
@@ -167,7 +177,7 @@ class FishEnvSchooling(coupled_env):
                 zs=[x[1] for x in self.chase_robot_trajectory_points],
                 ys=[x[2] for x in self.chase_robot_trajectory_points],
                 c=[[0,0,i/len(self.chase_robot_trajectory_points)] for i in range(len(self.chase_robot_trajectory_points))])
-        ax.view_init(elev=elev,azim=azim)#改变绘制图像的视�?即相机的位置,azim沿着z轴旋转，elev沿着y�?        ax.set_xlabel('x')
+        ax.view_init(elev=elev,azim=azim)#改变绘制图像的视�?即相机的位置,azim沿着z轴旋转，elev沿着y�?        ax.set_xlabel('x')
         ax.set_ylabel('z')
         ax.set_zlabel('y')
         if title!=None:

@@ -8,7 +8,7 @@ action = env.action_space.sample()
 obs, reward, done, info = env.step(action)
 env.render_mode = "rgb_array"
 # This outputs a numpy array which can be saved as image
-arr = env.render()
+arr = env.render(,
 
 # Save use Pillow
 from PIL import Image

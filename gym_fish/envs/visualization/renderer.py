@@ -78,7 +78,7 @@ class renderer:
         for mesh in self.meshes:
             self.prog['obj_color'] = mesh.color
             mesh.update()
-            mesh.vao.render(moderngl.TRIANGLES)
+            mesh.vao.render()
         # in the format of bytes
         color = Image.frombytes('RGB', self.fbo.size, self.fbo.read(), 'raw', 'RGB', 0, -1)
         depth = Image.frombytes('L', self.fbo.size, self.fbo.read(attachment=-1), 'raw', 'L').transpose(Image.FLIP_TOP_BOTTOM)

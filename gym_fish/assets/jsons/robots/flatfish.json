@@ -1,0 +1,808 @@
+{
+    "base_link_fwd": [
+        1,
+        0,
+        0
+    ],
+    "base_link_name": "[link]body",
+    "base_link_right": [
+        0,
+        0,
+        1
+    ],
+    "base_link_up": [
+        0,
+        1,
+        0
+    ],
+    "joints": {
+        "Hip": {
+            "actuator": "force",
+            "axis": [
+                [
+                    1,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    1
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.52
+                ],
+                "upper": [
+                    0.52
+                ],
+                "velocity": [
+                    10
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Hip",
+            "spring_stiffness": 0.1,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Pectoral_Fin_L": {
+            "actuator": "force",
+            "axis": [
+                [
+                    1,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.35
+                ],
+                "upper": [
+                    0.35
+                ],
+                "velocity": [
+                    1
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Pectoral_Fin_L",
+            "spring_stiffness": 0.1,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Pectoral_Fin_R": {
+            "actuator": "force",
+            "axis": [
+                [
+                    1,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.35
+                ],
+                "upper": [
+                    0.35
+                ],
+                "velocity": [
+                    1
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Pectoral_Fin_R",
+            "spring_stiffness": 0.1,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "body": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    1,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    1
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0,
+                    0
+                ],
+                "lower": [
+                    0,
+                    0
+                ],
+                "upper": [
+                    0,
+                    0
+                ],
+                "velocity": [
+                    0,
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "body",
+            "spring_stiffness": 0.0,
+            "type": "planar",
+            "use_dynamics": false,
+            "use_limits": false
+        },
+        "body_intermediate_0": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "body_intermediate_0",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "body_intermediate_1": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "body_intermediate_1",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "body_intermediate_2": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "body_intermediate_2",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "body_intermediate_3": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "body_intermediate_3",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "mouth": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "mouth",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "waist": {
+            "actuator": "force",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.52
+                ],
+                "upper": [
+                    0.52
+                ],
+                "velocity": [
+                    10
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "waist",
+            "spring_stiffness": 0.1,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Caudal_Fin": {
+            "actuator": "force",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.52
+                ],
+                "upper": [
+                    0.52
+                ],
+                "velocity": [
+                    10
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Caudal_Fin",
+            "spring_stiffness": 0.1,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Caudal_Fin2": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Caudal_Fin2",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Pectoral_Fin_L2": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    1,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.35
+                ],
+                "upper": [
+                    0.35
+                ],
+                "velocity": [
+                    10
+                ]
+            },
+            "name": "Pectoral_Fin_L2",
+            "spring_stiffness": 0,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Pectoral_Fin_L3": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Pectoral_Fin_L3",
+            "spring_stiffness": 0,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Pectoral_Fin_R2": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    1,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    10
+                ],
+                "lower": [
+                    -0.35
+                ],
+                "upper": [
+                    0.35
+                ],
+                "velocity": [
+                    10
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Pectoral_Fin_R2",
+            "spring_stiffness": 0,
+            "type": "revolute",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "Pectoral_Fin_R3": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "Pectoral_Fin_R3",
+            "spring_stiffness": 0,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        },
+        "head": {
+            "actuator": "passive",
+            "axis": [
+                [
+                    0,
+                    1,
+                    0
+                ]
+            ],
+            "dynamics": {
+                "damping": 0,
+                "friction": 0
+            },
+            "limit": {
+                "effort": [
+                    0
+                ],
+                "lower": [
+                    0
+                ],
+                "upper": [
+                    0
+                ],
+                "velocity": [
+                    0
+                ]
+            },
+            "mimic": {
+                "joint": "",
+                "multiplier": 1,
+                "offset": 0
+            },
+            "name": "head",
+            "spring_stiffness": 0.1,
+            "type": "fixed",
+            "use_dynamics": false,
+            "use_limits": true
+        }
+    },
+    "links": {
+        "[link]body": {
+            "is_intermediate": true,
+            "mass": 2,
+            "name": "[link]body",
+            "link_size": [
+                0,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]body::Pectoral_Fin_L": {
+            "is_intermediate": true,
+            "mass": 0,
+            "name": "[link]body::Pectoral_Fin_L",
+            "link_size": [
+                0.10558913811076316,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]body::Pectoral_Fin_R": {
+            "is_intermediate": true,
+            "mass": 0,
+            "name": "[link]body::Pectoral_Fin_R",
+            "link_size": [
+                0.1055891792433636,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]body::waist": {
+            "is_intermediate": false,
+            "mass": 2,
+            "name": "[link]body::waist",
+            "link_size": [
+                0.09413251077522075,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]waist::Hip": {
+            "is_intermediate": false,
+            "mass": 2,
+            "name": "[link]waist::Hip",
+            "link_size": [
+                0.07956674446969147,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]Caudal_Fin::Caudal_Fin2": {
+            "is_intermediate": false,
+            "mass": 2,
+            "name": "[link]Caudal_Fin::Caudal_Fin2",
+            "link_size": [
+                0.08180991755588074,
+                0.1,
+                0.1
+            ]
+        },
+        "[link]Hip::Caudal_Fin": {
+            "is_intermediate": false,
+            "mass": 2,
+            "name": "[link]Hip::Caudal_Fin",
+            "link_size": [
+                0.06885872031927552,
+                0.1,
+                0.1
+            ]
+        },
+        "[link]Pectoral_Fin_L2::Pectoral_Fin_L3": {
+            "is_intermediate": false,
+            "mass": 0.3,
+            "name": "[link]Pectoral_Fin_L2::Pectoral_Fin_L3",
+            "link_size": [
+                0.07346278131617232,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]Pectoral_Fin_L::Pectoral_Fin_L2": {
+            "is_intermediate": false,
+            "mass": 0.3,
+            "name": "[link]Pectoral_Fin_L::Pectoral_Fin_L2",
+            "link_size": [
+                0.05497619349126116,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]Pectoral_Fin_R2::Pectoral_Fin_R3": {
+            "is_intermediate": false,
+            "mass": 0.3,
+            "name": "[link]Pectoral_Fin_R2::Pectoral_Fin_R3",
+            "link_size": [
+                0.07346257588040198,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]Pectoral_Fin_R::Pectoral_Fin_R2": {
+            "is_intermediate": false,
+            "mass": 0.3,
+            "name": "[link]Pectoral_Fin_R::Pectoral_Fin_R2",
+            "link_size": [
+                0.054976331875900876,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]body::head": {
+            "is_intermediate": false,
+            "mass": 0.5,
+            "name": "[link]body::head",
+            "link_size": [
+                0.06108184098110793,
+                0.05,
+                0.05
+            ]
+        },
+        "[link]head::mouth": {
+            "is_intermediate": false,
+            "mass": 2,
+            "name": "[link]head::mouth",
+            "link_size": [
+                0.11916650176512998,
+                0.05,
+                0.05
+            ]
+        }
+    },
+    "model_file": "../testObjs/flatfish.fbx"
+}

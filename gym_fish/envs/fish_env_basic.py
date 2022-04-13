@@ -1,5 +1,8 @@
 from sys import path
 from typing import Any, Dict, Tuple
+
+from gym import spaces
+
 from .coupled_env import coupled_env
 from .lib import pyflare as fl
 from .py_util import np_util as np_util 
@@ -8,6 +11,9 @@ import os
 import math
 import json
 from pyquaternion import Quaternion
+
+from .visualization.camera import camera
+
 
 class FishEnvBasic(coupled_env):
     def __init__(self, 
@@ -23,10 +29,8 @@ class FishEnvBasic(coupled_env):
                 # phi should be in the range of [0,360]
                 phi = np.array([45,45]),
                 data_folder = "",
-                env_json :str = '../assets/env_file/env_basic.json',
+                env_json :str = '../assets/jsons/env_file/env_basic.json',
                 gpuId: int=0,
-                couple_mode: fl.COUPLE_MODE = fl.COUPLE_MODE.TWO_WAY,
-                empirical_force_amplifier =1600,
                  is3D=False,
                  use_com=True
                 ) -> None:
@@ -43,18 +47,32 @@ class FishEnvBasic(coupled_env):
         self.save=False
         self.is3D = is3D
         # use parent's init function to init default env data, like action space and observation space, also init dynamics
-        super().__init__(data_folder,env_json, gpuId, couple_mode=couple_mode,empirical_force_amplifier=empirical_force_amplifier)
+        super().__init__(data_folder,env_json, gpuId)
 
+    def _get_scene_camera(self) -> camera:
+        return camera(window_size=[800,600],center=[0.5,1,2],target=[0.5,0,0])
+
+    def _get_action_space(self) -> spaces.Box:
+        entity = self.simulator.solid_solver.GetEntity("fish")
+        bcu = entity.bcu
+        low = entity.GetForceLowerLimits()
+        high = entity.GetForceUpperLimits()
+        if bcu.enabled:
+            low = np.concatenate([low,[-bcu.max_delta_change]])
+            high = np.concatenate([high,[bcu.max_delta_change]])
+        return spaces.Box(low,high,shape=low.shape)
 
     def _step(self, action) -> None:
         t = 0
-        save_fluid = (self.save and self.couple_mode!= fl.COUPLE_MODE.EMPIRICAL)
+        agent = self.simulator.solid_solver.GetEntity("fish")
         while t<self.control_dt:
-            self.simulator.iter(action)
+            agent.SetCommands(action[:-1])
+            if agent.bcu.enabled:
+                agent.bcu.Change(action[-1])
+            self.simulator.step()
             t = t+self.simulator.dt
             self.render_at_framerate()
-            if self.save:
-                self.save_at_framerate(True,save_fluid)
+            self.save_at_framerate(self.save,self.save)
             if self._simulator_fail():
                 break
     def _get_reward(self, cur_obs, cur_action) :
@@ -88,10 +106,10 @@ class FishEnvBasic(coupled_env):
     def _get_obs(self) -> np.array:
         self._update_state()
         self.trajectory_points.append(self.body_xyz)
-        agent = self.simulator.rigid_solver.get_agent(0)
+        agent = self.simulator.solid_solver.GetEntity("fish")
         
         if not self.is3D:
-            if agent.has_buoyancy:
+            if agent.bcu.enabled:
                 scalar_obs  = np.array([self.angle_to_target,agent.bcu.bladder_volume])
             else:
                 scalar_obs= np.array([self.angle_to_target])
@@ -100,11 +118,11 @@ class FishEnvBasic(coupled_env):
                     scalar_obs,
                     self.dp_local,
                     self.vel_local,
-                    agent.positions/0.52,
-                    agent.velocities/10,
+                    agent.GetPositions()/0.52,
+                    agent.GetVelocities()/10,
             ),axis=0)
         else:
-            if agent.has_buoyancy:
+            if agent.bcu.enabled:
                 scalar_obs  = np.array([self.angle_to_target,agent.bcu.bladder_volume,self.rotation_distance])
             else:
                 scalar_obs= np.array([self.angle_to_target,self.rotation_distance])
@@ -114,8 +132,8 @@ class FishEnvBasic(coupled_env):
                     self.dp_local,
                     self.quaternion_diff,
                     self.vel_local,
-                    agent.positions/0.52,
-                    agent.velocities/10,
+                    agent.GetPositions()/0.52,
+                    agent.GetVelocities()/10,
             ),axis=0)
         
         if (not self._simulator_fail()):
@@ -123,22 +141,22 @@ class FishEnvBasic(coupled_env):
         return self.last_obs
 
     def _update_state(self):
-        agent = self.simulator.rigid_solver.get_agent(0)
+        agent = self.simulator.solid_solver.GetEntity("fish")
         if self.use_com:
-            self.body_xyz =  agent.com
-            vel  =  agent.linear_vel
+            self.body_xyz =  agent.GetCOM()
+            vel  =  agent.GetCOMLinearVelocity()
         else:
-            self.body_xyz = agent.base_link.position
-            vel  =  agent.base_link.linear_vel
+            self.body_xyz = agent.base_link.GetPosition()
+            vel  =  agent.GetBaseLink().GetCOMLinearVelocity()
         # update local matrix
-        x_axis = agent.fwd_axis
-        y_axis = agent.up_axis
-        z_axis = agent.right_axis
+        x_axis = agent.GetBaseLinkFwd()
+        y_axis = agent.GetBaseLinkUp()
+        z_axis = agent.GetBaseLinkRight()
         self.world_to_local = np.linalg.inv(np.array([x_axis,y_axis,z_axis]).transpose())
         self.rpy = np.arccos(np.array([x_axis[0],y_axis[1],z_axis[2]]))
         self.walk_target_dist = np.linalg.norm(self.body_xyz-self.goal_pos)
         self.angle_to_target = np.arccos(np.dot(x_axis, (self.goal_pos-self.body_xyz)/self.walk_target_dist ))
-        if np.dot((self.goal_pos-self.body_xyz)/self.walk_target_dist,agent.right_axis)<0:
+        if np.dot((self.goal_pos-self.body_xyz)/self.walk_target_dist,z_axis)<0:
             self.angle_to_target = -self.angle_to_target
         #in local coordinate
         self.dp_local = np.dot(self.world_to_local,np.transpose(self.goal_pos-self.body_xyz))
@@ -154,8 +172,8 @@ class FishEnvBasic(coupled_env):
         return -self.walk_target_dist /self.control_dt* 4
 
     def set_task(self,theta,phi,dist):
-        agent = self.simulator.rigid_solver.get_agent(0)
-        self.init_pos = agent.com
+        agent = self.simulator.solid_solver.GetEntity("fish")
+        self.init_pos = agent.GetCOM()
         goal_dir = np.array([math.sin(theta)*math.cos(phi),math.sin(theta)*math.sin(phi),math.cos(theta)])
             
         fwd_vec =goal_dir
@@ -177,8 +195,6 @@ class FishEnvBasic(coupled_env):
         self.path_start = self.goal_pos-self.path_dir*self.radius
     
     def _reset_task(self):
-        agent = self.simulator.rigid_solver.get_agent(0)
-        agent.bcu.reset(randomize=False)
         theta = self.np_random.uniform(self.theta[0],self.theta[1])
         phi = self.np_random.uniform(self.phi[0],self.phi[1])
         

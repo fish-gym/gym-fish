@@ -1,6 +1,5 @@
 
 from typing import Any, List
-from gym_fish.envs.py_util import flare_util
 import numpy as np
 class pose:
     def __init__(self,position:np.array = np.array([0,0,0]),orientation:np.array = np.array([0,0,0]) ) -> None:
@@ -9,23 +8,8 @@ class pose:
         self.orientation = orientation
 
 class trajectory:
-    def __init__(self,points:List[List[float]]) -> None:
-        self._traj = fl.make_trajectory()
-        self._points = points
-        _ps = []
-        for p in self._points:
-            point = fl.make_tpPoint()
-            point.data = p
-            _ps.append(point)
-        self.trajectory.setPoints(_ps)
-        self.trajectory.fit()
-        self.trajectory.sample(300)
-    def __init__(self,path_data:flare_util.path_data) -> None:
-        self._traj = path_data.trajectory
-        self._points = [p.data for p in path_data.points]
-    @property
-    def points(self):
-        return self._points
+    def __init__(self,config_file:str) -> None:
+        self._traj = fl.LoadTrajectoryFromJsonFile(config_file)
     def get_dist(self,x:float,y:float,z:float)->float:
         t  = self.parameterize(x,y,z)
         p_on_path = self._traj.getPose(t)
