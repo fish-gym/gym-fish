@@ -9,6 +9,6 @@ https://user-images.githubusercontent.com/20988615/156168462-d4d54b52-ac7d-40b9-
 
 ## Contact us
 
-This repository is no longer maintained. If anyone is interested in Fish Gym and wants a trial, please send an email for further information:
+If anyone is interested in Fish Gym and wants a trial, please send an email for further information:
 
 songwb@shanghaitech.edu.cn ; wangjw2023@shanghaitech.edu.cn
