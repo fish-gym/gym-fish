@@ -7,8 +7,10 @@ https://user-images.githubusercontent.com/20988615/156168462-d4d54b52-ac7d-40b9-
 
 
 
-## Contact us
+## Notes on further development
 
-If anyone is interested in Fish Gym and wants a trial, please send an email for further information:
+FishGym has been continued as part of the Flare Live software. 
 
-songwb@shanghaitech.edu.cn ; wangjw2023@shanghaitech.edu.cn
+Besides underwater simulations, Flare Live is also applicable to aerial scenarios, with stronger scene editing and visualization in GUI, and more flexible control through Python interface.
+
+If anyone is interested, visit [our website](https://collisionmodel.com) for more information.
