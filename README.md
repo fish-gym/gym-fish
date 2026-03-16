@@ -13,4 +13,4 @@ FishGym has been continued as part of the Flare Live software.
 
 Besides underwater simulations, Flare Live is also applicable to aerial scenarios, with stronger scene editing and visualization in GUI, and more flexible control through Python interface.
 
-If anyone is interested, visit [our website](https://collisionmodel.com) for more information.
+If anyone is interested, visit [our website](https://manifold-dynamics.com) for more information.
